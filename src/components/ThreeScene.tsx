@@ -13,14 +13,13 @@ export default function ThreeScene() {
   const [dpr, setDpr] = useState(1.5);
   const terrainRef = useRef<THREE.Mesh | null>(null);
 
-  // Scene configuration
   const [sceneConfig, setSceneConfig] = useState<SceneConfig>({
     terrainConfig: {
       width: 500,
       height: 500,
       segmentsX: 100,
       segmentsZ: 100,
-      amplitude: 15,
+      amplitude: 300,
       seed: 42,
     },
     lightIntensity: 1.2,
