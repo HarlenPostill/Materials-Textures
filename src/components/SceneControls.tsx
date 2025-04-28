@@ -1,7 +1,6 @@
-'use client';
-import React, { useState } from 'react';
-import * as THREE from 'three';
-import { SceneConfig, ModelData, TerrainConfig } from '@/types/models';
+"use client";
+import React, { useState } from "react";
+import { SceneConfig, ModelData, TerrainConfig } from "@/types/models";
 
 interface SceneControlsProps {
   sceneConfig: SceneConfig;
@@ -17,7 +16,7 @@ export default function SceneControls({
   onClearModels,
 }: SceneControlsProps) {
   const [showControls, setShowControls] = useState(true);
-  const [modelType, setModelType] = useState('tree');
+  const [modelType, setModelType] = useState("tree");
 
   // Create a deep copy of configs to avoid direct mutation
   const [terrainConfig, setTerrainConfig] = useState<TerrainConfig>({
@@ -39,7 +38,10 @@ export default function SceneControls({
   };
 
   // Update a single scene config field
-  const handleSceneChange = (field: keyof Omit<SceneConfig, 'terrainConfig'>, value: number) => {
+  const handleSceneChange = (
+    field: keyof Omit<SceneConfig, "terrainConfig">,
+    value: number
+  ) => {
     onUpdateConfig({
       ...sceneConfig,
       [field]: value,
@@ -59,22 +61,22 @@ export default function SceneControls({
     };
 
     // Model templates
-    const modelTemplates: Record<string, Omit<ModelData, 'id' | 'position'>> = {
+    const modelTemplates: Record<string, Omit<ModelData, "id" | "position">> = {
       tree: {
-        name: 'Tree',
-        path: '/models/tree.glb',
+        name: "Tree",
+        path: "/models/tree.glb",
         scale: 0.5,
         rotation: [0, Math.random() * Math.PI * 2, 0],
       },
       rock: {
-        name: 'Rock',
-        path: '/models/rock.glb',
+        name: "Rock",
+        path: "/models/rock.glb",
         scale: 0.8,
         rotation: [0, Math.random() * Math.PI * 2, 0],
       },
       house: {
-        name: 'House',
-        path: '/models/house.glb',
+        name: "House",
+        path: "/models/house.glb",
         scale: 1.2,
         rotation: [0, Math.random() * Math.PI * 2, 0],
       },
@@ -99,41 +101,41 @@ export default function SceneControls({
   };
 
   const controlsStyle: React.CSSProperties = {
-    position: 'absolute',
-    top: '20px',
-    right: '20px',
-    width: '300px',
-    padding: '15px',
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    color: 'white',
-    borderRadius: '8px',
-    fontFamily: 'sans-serif',
+    position: "absolute",
+    top: "20px",
+    right: "20px",
+    width: "300px",
+    padding: "15px",
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    color: "white",
+    borderRadius: "8px",
+    fontFamily: "sans-serif",
     zIndex: 1000,
-    maxHeight: '80vh',
-    overflowY: 'auto',
+    maxHeight: "80vh",
+    overflowY: "auto",
   };
 
   const buttonStyle: React.CSSProperties = {
-    padding: '8px 12px',
-    margin: '5px',
-    borderRadius: '4px',
-    border: 'none',
-    backgroundColor: '#4a4a4a',
-    color: 'white',
-    cursor: 'pointer',
-    fontSize: '14px',
+    padding: "8px 12px",
+    margin: "5px",
+    borderRadius: "4px",
+    border: "none",
+    backgroundColor: "#4a4a4a",
+    color: "white",
+    cursor: "pointer",
+    fontSize: "14px",
   };
 
   const toggleButtonStyle: React.CSSProperties = {
-    position: 'absolute',
-    top: '20px',
-    right: '20px',
-    padding: '8px 15px',
-    borderRadius: '4px',
-    border: 'none',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    color: 'white',
-    cursor: 'pointer',
+    position: "absolute",
+    top: "20px",
+    right: "20px",
+    padding: "8px 15px",
+    borderRadius: "4px",
+    border: "none",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    color: "white",
+    cursor: "pointer",
     zIndex: 1001,
   };
 
@@ -141,7 +143,7 @@ export default function SceneControls({
     <>
       {/* Toggle button - always visible */}
       <button style={toggleButtonStyle} onClick={toggleControls}>
-        {showControls ? 'Hide Controls' : 'Show Controls'}
+        {showControls ? "Hide Controls" : "Show Controls"}
       </button>
 
       {/* Controls panel */}
@@ -155,8 +157,10 @@ export default function SceneControls({
               min="100"
               max="1000"
               value={terrainConfig.width}
-              onChange={e => handleTerrainChange('width', Number(e.target.value))}
-              style={{ width: '100%' }}
+              onChange={(e) =>
+                handleTerrainChange("width", Number(e.target.value))
+              }
+              style={{ width: "100%" }}
             />
             <span>{terrainConfig.width}</span>
           </div>
@@ -168,8 +172,10 @@ export default function SceneControls({
               min="100"
               max="1000"
               value={terrainConfig.height}
-              onChange={e => handleTerrainChange('height', Number(e.target.value))}
-              style={{ width: '100%' }}
+              onChange={(e) =>
+                handleTerrainChange("height", Number(e.target.value))
+              }
+              style={{ width: "100%" }}
             />
             <span>{terrainConfig.height}</span>
           </div>
@@ -181,8 +187,10 @@ export default function SceneControls({
               min="1"
               max="50"
               value={terrainConfig.amplitude}
-              onChange={e => handleTerrainChange('amplitude', Number(e.target.value))}
-              style={{ width: '100%' }}
+              onChange={(e) =>
+                handleTerrainChange("amplitude", Number(e.target.value))
+              }
+              style={{ width: "100%" }}
             />
             <span>{terrainConfig.amplitude}</span>
           </div>
@@ -194,12 +202,12 @@ export default function SceneControls({
               min="20"
               max="200"
               value={terrainConfig.segmentsX}
-              onChange={e => {
+              onChange={(e) => {
                 const value = Number(e.target.value);
-                handleTerrainChange('segmentsX', value);
-                handleTerrainChange('segmentsZ', value);
+                handleTerrainChange("segmentsX", value);
+                handleTerrainChange("segmentsZ", value);
               }}
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
             />
             <span>{terrainConfig.segmentsX}</span>
           </div>
@@ -211,8 +219,10 @@ export default function SceneControls({
               min="1"
               max="100"
               value={terrainConfig.seed}
-              onChange={e => handleTerrainChange('seed', Number(e.target.value))}
-              style={{ width: '100%' }}
+              onChange={(e) =>
+                handleTerrainChange("seed", Number(e.target.value))
+              }
+              style={{ width: "100%" }}
             />
             <span>{terrainConfig.seed}</span>
           </div>
@@ -230,8 +240,10 @@ export default function SceneControls({
               max="2"
               step="0.1"
               value={sceneConfig.lightIntensity}
-              onChange={e => handleSceneChange('lightIntensity', Number(e.target.value))}
-              style={{ width: '100%' }}
+              onChange={(e) =>
+                handleSceneChange("lightIntensity", Number(e.target.value))
+              }
+              style={{ width: "100%" }}
             />
             <span>{sceneConfig.lightIntensity}</span>
           </div>
@@ -244,8 +256,13 @@ export default function SceneControls({
               max="1"
               step="0.1"
               value={sceneConfig.ambientLightIntensity}
-              onChange={e => handleSceneChange('ambientLightIntensity', Number(e.target.value))}
-              style={{ width: '100%' }}
+              onChange={(e) =>
+                handleSceneChange(
+                  "ambientLightIntensity",
+                  Number(e.target.value)
+                )
+              }
+              style={{ width: "100%" }}
             />
             <span>{sceneConfig.ambientLightIntensity}</span>
           </div>
@@ -258,8 +275,10 @@ export default function SceneControls({
               max="0.01"
               step="0.0001"
               value={sceneConfig.fogDensity}
-              onChange={e => handleSceneChange('fogDensity', Number(e.target.value))}
-              style={{ width: '100%' }}
+              onChange={(e) =>
+                handleSceneChange("fogDensity", Number(e.target.value))
+              }
+              style={{ width: "100%" }}
             />
             <span>{sceneConfig.fogDensity.toFixed(4)}</span>
           </div>
@@ -272,8 +291,10 @@ export default function SceneControls({
               max="20"
               step="0.5"
               value={sceneConfig.skyTurbidity}
-              onChange={e => handleSceneChange('skyTurbidity', Number(e.target.value))}
-              style={{ width: '100%' }}
+              onChange={(e) =>
+                handleSceneChange("skyTurbidity", Number(e.target.value))
+              }
+              style={{ width: "100%" }}
             />
             <span>{sceneConfig.skyTurbidity}</span>
           </div>
@@ -283,8 +304,9 @@ export default function SceneControls({
             <label>Model Type:</label>
             <select
               value={modelType}
-              onChange={e => setModelType(e.target.value)}
-              style={{ width: '100%', padding: '5px', marginBottom: '10px' }}>
+              onChange={(e) => setModelType(e.target.value)}
+              style={{ width: "100%", padding: "5px", marginBottom: "10px" }}
+            >
               <option value="tree">Tree</option>
               <option value="rock">Rock</option>
               <option value="house">House</option>
@@ -295,7 +317,10 @@ export default function SceneControls({
             Add Model
           </button>
 
-          <button style={{ ...buttonStyle, backgroundColor: '#aa3333' }} onClick={onClearModels}>
+          <button
+            style={{ ...buttonStyle, backgroundColor: "#aa3333" }}
+            onClick={onClearModels}
+          >
             Clear All Models
           </button>
         </div>
